@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>School Admin Template | 2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200">
+    <header class="bg-white rounded-xl container mx-auto py-6 sm:py-8 md:py-10 lg:py-12 mt-10 flex items-center justify-between px-6 sm:px-8 md:px-10 lg:px-12">
+        <!-- Logo -->
+        <div>
+            <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 lg:h-14">
+        </div>
+    
+        <!-- Add a gap between logo and search bar -->
+        <div class="ml-4 sm:ml-6 md:ml-8 lg:ml-10"></div>
+    
+        <!-- Search input with icon -->
+        <div class="relative flex items-center">
+            <input type="text" placeholder="Search..." class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                <!-- Search icon -->
+                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+        </div>
+    
+        <!-- Align elements to the right -->
+        <div class="flex items-center space-x-4 ml-auto">
+            <!-- Contact number -->
+            <span class="hidden sm:inline text-gray-600">123-456-7890</span>
+    
+            <!-- Message icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+            </svg>              
+    
+            <!-- Notification icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+              </svg>              
+    
+            <!-- Vertical border -->
+            <div class="hidden sm:inline border-l border-gray-300 h-6 mx-4"></div>
+    
+            <!-- Username and avatar image -->
+            <div class="hidden sm:flex items-center space-x-2">
+                <span class="text-gray-600">Username</span>
+                <img src="avatar.jpg" alt="Avatar" class="h-8 w-8 rounded-full">
+            </div>
+        </div>
+    </header>
+    
+
+</body>
+</html>
