@@ -11,16 +11,21 @@ class BlogComponent extends Component
 {
     use WithFileUploads;
 
+    use WithFileUploads;
+
+    // Section form properties
     public $main_title;
     public $description;
     public $background_image;
     public $background_image_path;
+
+    // Blog form properties
+    public $blogId;
     public $title;
     public $content;
     public $thumbnail;
     public $thumbnail_path;
     public $blogs = [];
-    public $blogId = null;
 
     protected $rules = [
         'main_title' => 'required|string|max:255',
@@ -45,24 +50,23 @@ class BlogComponent extends Component
 
     public function storeSection()
     {
-        $this->validate();
+        $this->validate([
+            'main_title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'background_image' => 'nullable|image|max:1024',
+        ]);
 
-        $section = BlogSection::first();
-        if ($section) {
-            $section->update([
-                'main_title' => $this->main_title,
-                'description' => $this->description,
-                'background_image' => $this->background_image_path,
-            ]);
-        } else {
-            BlogSection::create([
-                'main_title' => $this->main_title,
-                'description' => $this->description,
-                'background_image' => $this->background_image_path,
-            ]);
+        if ($this->background_image) {
+            $this->background_image_path = $this->background_image->store('sections', 'public');
         }
 
-        flash()->success('Student Blog Section updated successfully.');
+        BlogSection::create([
+            'main_title' => $this->main_title,
+            'description' => $this->description,
+            'background_image' => $this->background_image_path,
+        ]);
+
+        session()->flash('message', 'Section created successfully.');
     }
     public function storeBlog()
     {

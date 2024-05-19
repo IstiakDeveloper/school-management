@@ -7,7 +7,7 @@
     @endif
 
     <!-- Main Title and Description Form -->
-    <form wire:submit="storeSection" class="grid grid-cols-1 gap-6 mb-8">
+    <form wire:submit.prevent="storeSection" class="grid grid-cols-1 gap-6 mb-8">
         <!-- Main Title -->
         <div class="col-span-1">
             <label for="main_title" class="block text-sm font-medium text-gray-700">Main Title</label>
