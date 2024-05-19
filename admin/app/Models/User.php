@@ -23,7 +23,13 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'student_admission_id',
     ];
+
+    public function studentAdmission()
+    {
+        return $this->belongsTo(StudentAdmission::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

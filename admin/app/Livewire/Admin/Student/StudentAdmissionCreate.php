@@ -74,6 +74,7 @@ class StudentAdmissionCreate extends Component
     public $school_class_id;
     public $branch_id;
     public $showMinorityName = false;
+    public $studentAdmission;
 
 
     public function render()
@@ -148,21 +149,23 @@ class StudentAdmissionCreate extends Component
             $validatedData['photo'] = $this->photo->store('photos', 'public');
         }
 
-        StudentAdmission::create($validatedData);
+        $studentAdmission = StudentAdmission::create($validatedData);
 
         $user = User::create([
             'name' => $this->name_en,
             'email' => $this->mother_mobile,
             'password' => Hash::make('studentpassword'),
+            'student_admission_id' => $studentAdmission->id, // Associate the admission with the user
         ]);
 
+        // Assign the 'Student' role to the user
         $studentRole = Role::where('name', 'Student')->firstOrCreate(['name' => 'Student']);
         $user->assignRole($studentRole);
 
+        // Reset the form and provide feedback
         $this->reset();
         flash()->success('Student admission created successfully.');
         return Redirect::route('admissions');
-
     }
 
     public function toggleMinorityNameVisibility($value)
