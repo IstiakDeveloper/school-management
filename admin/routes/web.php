@@ -27,6 +27,7 @@ use App\Livewire\RP\PermissionManager;
 use App\Livewire\RP\RoleManager;
 use App\Livewire\RP\UserManager;
 use App\Livewire\User\HomeComponent;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
@@ -78,6 +79,14 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
+Route::get('/run-branch-seeder', function () {
+    Artisan::call('db:seed', [
+        '--class' => 'BranchSeeder'
+    ]);
+
+    return 'BranchSeeder has been run successfully!';
+});
 
 
 

@@ -13,7 +13,7 @@ class BranchSeeder extends Seeder
      */
     public function run(): void
     {
-        $branchNames = ['branch1', 'branch2', 'branch3', 'branch4', 'branch5'];
+        $branchNames = ['Golap', 'Rajnigandha', 'Hasnahena', 'Shapla', 'Beli'];
 
         // Create branches
         foreach ($branchNames as $name) {

@@ -262,19 +262,26 @@
 
         <!-- Events -->
         <section class="mt-20">
-            <div class="bg-image-3 bg-cover bg-center md:h-[800px] relative px-8 py-8 md:px-8 md:mb-12">
+            <div class="bg-cover bg-center md:h-[800px] relative px-8 py-8 md:px-8 md:mb-12" style="
+            background: url('{{ asset('storage/' . $blogSection->background_image) }}') no-repeat;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.6);
+            background-blend-mode: overlay;
+            background-position: center;
+            background-size: cover;
+        ">
                 <div class="absolute inset-0 bg-black opacity-70"></div>
                 <div class="container mx-auto relative z-10">
                     <div class="flex flex-col items-center justify-center text-white">
-                        <h1 class="text-3xl mt-10 font-bold">Our Latest Event</h1>
-                        <p class="text-center mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est adipisci tenetur atque <br> voluptates ducimus omnis eligendi nulla numquam, distinctio maiores?</p>
+                        <h1 class="text-3xl mt-10 font-bold">{{$blogSection['main_title']}}</h1>
+                        <p class="text-center mt-4">{{$blogSection['description']}}</p>
                     </div>
 
                         <div class="md:flex justify-between md:flex-row md:mt-10">
                             <div class="pb-20">
                                 @if ($latestBlog)
                                     <a href="{{ route('blog.show', $latestBlog->id) }}">
-                                        <img src="{{ Storage::disk('public')->url($latestBlog->thumbnail) }}" width="500px" alt="{{ $latestBlog->title }}">
+                                        <img class="w-[500px] h-[300px] object-cover" src="{{ Storage::disk('public')->url($latestBlog->thumbnail) }}" alt="{{ $latestBlog->title }}">
                                         <h3 class="text-white mt-5">{{ $latestBlog->created_at->format('d F Y | h:i A') }}</h3>
                                         <h1 class="text-2xl text-white font-bold">{{ $latestBlog->title }}</h1>
                                         <button class="bg-orange-500 text-white hover:bg-gray-600 py-3 px-4 rounded mt-6">Read More</button>

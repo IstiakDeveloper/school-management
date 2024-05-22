@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Models\Blog;
+use App\Models\BlogSection;
 use App\Models\HeroSection;
 use App\Models\Logo;
 use App\Models\SmarterLearnerSection;
@@ -22,6 +23,7 @@ class HomeComponent extends Component
     public $studentReviews;
     public $heroSection;
     public $studentReviewItems;
+    public $blogSection;
     public $latestBlog;
     public $lastFiveBlogs;
 
@@ -34,8 +36,10 @@ class HomeComponent extends Component
         $this->studentReviews = StudentReview::first();
         $this->studentReviewItems = StudentReviewItem::all();
         $this->heroSection = HeroSection::first();
+        $this->blogSection = BlogSection::first();
         $this->latestBlog = Blog::latest()->first();
         $this->lastFiveBlogs = Blog::latest()->take(5)->get();
+
     }
 
     public function render()
@@ -48,6 +52,7 @@ class HomeComponent extends Component
             'studentReviews' => $this->studentReviews,
             'studentReviewItems' => $this->studentReviewItems,
             'heroSection' => $this->heroSection,
+            'blogSection' => $this->blogSection,
             'latestBlog' => $this->latestBlog,
             'lastFiveBlogs' => $this->lastFiveBlogs,
         ])->layout('layouts.front');
