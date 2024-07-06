@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Mousumi Biddyanikaton | 2024</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
 </head>
 <body>
 
@@ -51,7 +51,7 @@
         <div class="container mx-auto px-8 py-8 md:py-12 md:px-8">
             <div class="gap-4 md:grid grid-cols-4 py-12">
                 <div class="flex md:grid flex-col items-center justify-center py-4 md:py-0">
-                    <h1 class="text-3xl font-bold"><span class="text-green-700">Dor</span><span class="text-orange-500">ik</span> <span class="text-green-700">School</span></h1>
+                    <h1 class="text-3xl font-bold"><span class="text-green-700">Mou</span><span class="text-orange-500">su</span> <span class="text-green-700">mi</span></h1>
                     <p class="text-gray-800">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut necessitatibus repellat debitis recusandae beatae corporis.</p>
                     <div class="my-4 flex items-center">
                         <svg class="orange-fill" width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
