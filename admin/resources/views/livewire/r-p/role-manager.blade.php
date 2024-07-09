@@ -1,4 +1,4 @@
-<div class="rounded-2xl p-8 bg-white shadow-md">
+<div class="rounded-2xl p-8 shadow-md">
     <!-- Role Form -->
     <form @if ($selectedRole) wire:submit.prevent="updateRole" @else wire:submit.prevent="createRole" @endif class="mb-4">
         <!-- Role Name Input -->
@@ -19,8 +19,8 @@
     <table class="min-w-full divide-y divide-gray-200">
         <thead>
             <tr>
-                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th class="px-6 py-3 bg-gray-50"></th>
+                <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3"></th>
             </tr>
         </thead>
         <tbody>

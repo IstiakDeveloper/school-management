@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     @foreach($results->groupBy('semester') as $semester => $semesterResults)
-        <div class="bg-white p-4 rounded-lg">
+        <div class="p-4 rounded-lg">
             <h2 class="text-lg font-bold mb-4">{{ $semester }} Results</h2>
             <div class="overflow-x-auto">
                 <table class="table-auto w-full">

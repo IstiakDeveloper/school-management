@@ -1,4 +1,4 @@
-<div class="rounded-2xl p-8 bg-white shadow-md">
+<div class="rounded-2xl p-8 shadow-md">
     @if ($editingPermissionId)
         <!-- Update Permission Form -->
         <form wire:submit.prevent="updatePermission({{ $editingPermissionId }})" class="mb-4">
@@ -28,13 +28,15 @@
 
     <!-- Permission List -->
     <table class="min-w-full divide-y divide-gray-200">
+
         <thead>
             <tr>
-                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Associated Role</th>
-                <th class="px-6 py-3 bg-gray-50"></th>
+                <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Associated Role</th>
+                <th class="px-6 py-3">Action</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach ($permissions as $permission)
                 <tr>
@@ -53,5 +55,6 @@
                 </tr>
             @endforeach
         </tbody>
+        
     </table>
 </div>

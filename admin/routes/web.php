@@ -21,6 +21,10 @@ use App\Livewire\Admin\Website\HeroSectionComponent;
 use App\Livewire\Admin\Website\SmarterLearnerSectionComponent;
 use App\Livewire\Admin\Website\StudentReviewComponent;
 use App\Livewire\Admin\Website\VideoClassSectionComponent;
+use App\Livewire\Admin\Teacher\IndexComponent;
+use App\Livewire\Admin\Teacher\CreateComponent;
+use App\Livewire\Admin\Teacher\EditComponent;
+use App\Livewire\Admin\Teacher\ShowComponent;;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\RP\PermissionManager;
@@ -75,6 +79,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/smart-learn-section', SmarterLearnerSectionComponent::class)->name('smart.learn-section');
     Route::get('/admin/student-review-section', StudentReviewComponent::class)->name('student.review-section');
     Route::get('/admin/blogs', BlogComponent::class)->name('admin.blogs');
+
+    Route::get('admin/teachers', IndexComponent::class)->name('teachers.index');
+    Route::get('admin/teachers/create', CreateComponent::class)->name('teachers.create');
+    Route::get('/teachers/{teacher}/edit', EditComponent::class)->name('teachers.edit');
+    Route::get('/teachers/{teacher}', ShowComponent::class)->name('teachers.show');
+
+
+
 
 
 });

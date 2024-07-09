@@ -1,4 +1,4 @@
-<div class="rounded-2xl p-8 bg-white shadow-md">
+<div class="rounded-2xl p-8 shadow-md">
     <!-- User Selection Section -->
     <div class="mb-6">
         <h2 class="text-lg font-semibold mb-2">Select User</h2>
@@ -11,7 +11,6 @@
         @error('user') <span class="text-red-500">{{ $message }}</span> @enderror
     </div>
 
-    <!-- Assign Role Section -->
     @if($user)
         <div>
             <h2 class="text-lg font-semibold mb-2">Assign Role</h2>
@@ -33,7 +32,7 @@
         <h2 class="text-lg font-semibold mb-2">Users and Assigned Roles</h2>
         <table class="w-full border-collapse border border-gray-200">
             <thead>
-                <tr class="bg-gray-100">
+                <tr class="">
                     <th class="border border-gray-200 px-4 py-2">User</th>
                     <th class="border border-gray-200 px-4 py-2">Assigned Roles</th>
                     <th class="border border-gray-200 px-4 py-2">Actions</th>

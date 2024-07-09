@@ -1,4 +1,4 @@
-<div class="p-8 bg-white rounded-lg shadow-md">
+<div class="p-8 rounded-lg shadow-md">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Student Attendance</h1>
         <a class="bg-blue-500 py-2 px-4 text-white font-semibold rounded-lg hover:bg-blue-600" href="{{route('attendance.report')}}">Report</a>
@@ -9,7 +9,7 @@
     <form wire:submit.prevent="markAttendance">
         <div class="mb-4">
             <label for="classFilter" class="block text-sm font-medium text-gray-700">Filter by Class:</label>
-            <select id="classFilter" wire:model="classFilter" wire:change="$refresh" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            <select id="classFilter" wire:model="classFilter" wire:change="$refresh" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 <option value="">All Classes</option>
                 @foreach($schoolClasses as $class)
                 <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -18,7 +18,7 @@
         </div>
         <table class="w-full border-collapse border border-gray-300">
             <thead>
-                <tr class="bg-gray-200">
+                <tr class="">
                     <th class="border border-gray-300 px-4 py-2">Select</th>
                     <th class="border border-gray-300 px-4 py-2">Student Name</th>
                     <th class="border border-gray-300 px-4 py-2">Student ID</th>

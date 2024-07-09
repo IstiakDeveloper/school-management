@@ -4,8 +4,8 @@
             <h1 class="text-2xl font-semibold mb-4">Student Admission Details</h1>
             <div class="grid grid-cols-2 gap-4">
                 <!-- Student Information -->
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Student Information</h2>
+                <div class=" p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Student Information</h2>
                     <div class="grid grid-cols-2 justify-center items-center">
                         <div>
                             <div>
@@ -96,8 +96,8 @@
                     </div>
                 </div>
                 <!-- Student Parents Information -->
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Mother Information</h2>
+                <div class="p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Mother Information</h2>
                     <div>
                         <p class="font-semibold">Mother NID or DOB Certificate Number:</p>
                         <p>{{ $studentAdmission->mother_nid }}</p>
@@ -124,8 +124,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Father Information</h2>
+                <div class="p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Father Information</h2>
                     <div>
                         <p class="font-semibold">Father NID or DOB Certificate Number:</p>
                         <p>{{ $studentAdmission->father_nid }}</p>
@@ -156,8 +156,8 @@
                     </div>
                 </div>
                 <!-- Present Address -->
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Present Address</h2>
+                <div class="p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Present Address</h2>
                     <div>
                         <p class="font-semibold">Division:</p>
                         <p>{{ $studentAdmission->present_address_division }}</p>
@@ -196,8 +196,8 @@
                     </div>
                 </div>
                 <!-- Permanent Address -->
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Permanent Address</h2>
+                <div class="p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Permanent Address</h2>
                     <div>
                         <p class="font-semibold">Division:</p>
                         <p>{{ $studentAdmission->permanent_address_division }}</p>
@@ -236,8 +236,8 @@
                     </div>
                 </div>
                 <!-- Guardian Information -->
-                <div class="bg-white p-6 rounded-lg">
-                    <h2 class="text-lg font-semibold my-4 text-center p-4 bg-gray-100 rounded-lg">Gurdian Information</h2>
+                <div class="p-6 rounded-lg">
+                    <h2 class="text-lg font-semibold my-4 text-center p-4  border rounded-lg">Gurdian Information</h2>
                     <div>
                         <p class="font-semibold">Guardian NID or DOB Certificate Number:</p>
                         <p>{{ $studentAdmission->guardian_nid }}</p>
@@ -270,7 +270,7 @@
                     @endif
                 </div>
                 <!-- Agreement -->
-                <div class="col-span-2 bg-white p-6 rounded-lg">
+                <div class="col-span-2 p-6 rounded-lg">
                     <label class="inline-flex items-center">
                         <input type="checkbox" class="form-checkbox" disabled {{ $studentAdmission->information_correct ? 'checked' : '' }}>
                         <span class="ml-2">I agree with all information is correct</span>

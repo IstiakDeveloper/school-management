@@ -1,4 +1,4 @@
-<div class="container mx-auto p-8 bg-white rounded-lg shadow">
+<div class="mx-auto p-8 rounded-lg shadow">
     <h2 class="text-2xl font-bold mb-6">Manage Video Classes Section</h2>
     @if (session()->has('message'))
         <div class="bg-green-500 text-white p-4 rounded mb-6">
@@ -70,7 +70,7 @@
         <h3 class="text-xl font-bold mb-4">Video Classes</h3>
         <ul>
             @foreach ($classes as $class)
-                <li class="flex items-center justify-between mb-4 p-4 bg-gray-100 rounded-lg">
+                <li class="flex items-center justify-between mb-4 p-4 border rounded-lg">
                     <div>
                         <h4 class="text-lg font-semibold">{{ $class['title'] }}</h4>
                         <p class="text-sm text-gray-700">{{ $class['subtitle'] }}</p>

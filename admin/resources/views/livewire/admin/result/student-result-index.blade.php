@@ -1,4 +1,4 @@
-<div class="overflow-x-auto bg-white p-4 rounded-lg">
+<div class="overflow-x-auto p-4 rounded-lg">
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-semibold">Students Results</h1>
         <div>

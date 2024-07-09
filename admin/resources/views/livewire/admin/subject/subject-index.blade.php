@@ -1,4 +1,4 @@
-<div class="mx-auto p-8 bg-white rounded-lg">
+<div class="mx-auto p-8   rounded-lg">
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-semibold">Subjects by Class</h1>
         <div>
@@ -28,15 +28,15 @@
                         <tr>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th class="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200">
                         @foreach ($subjects as $subject)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $subject->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $subject->name }}</td>
-                                <td class="px-6 py-4 flex justify-center items-center gap-4">
+                                <td class="px-6 py-4 flex whitespace-nowrap  justify-end items-center gap-4">
                                     <a href="{{ route('subjects.edit', $subject->id)}}" class="text-blue-600 hover:text-blue-900"><x-lucide-file-pen-line
                                         class="h-6 w-6" /></a>
                                     <button wire:click="confirmDelete({{ $subject->id }})" class="text-red-600 hover:text-red-900"><x-lucide-trash-2 class="h-6 w-6" /></button>

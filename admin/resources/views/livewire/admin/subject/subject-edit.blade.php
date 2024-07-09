@@ -1,4 +1,4 @@
-<div class="mx-auto p-8 bg-white rounded-lg">
+<div class="mx-auto p-8  rounded-lg">
     <h2 class="text-xl font-semibold mb-4">Edit Subject</h2>
 
     <form wire:submit.prevent="update">
