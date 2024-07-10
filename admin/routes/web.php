@@ -27,6 +27,7 @@ use App\Livewire\Admin\Teacher\EditComponent;
 use App\Livewire\Admin\Teacher\ShowComponent;;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\FingerDeviceComponent;
 use App\Livewire\RP\PermissionManager;
 use App\Livewire\RP\RoleManager;
 use App\Livewire\RP\UserManager;
@@ -43,6 +44,9 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/', Logout::class)->name('logout');
 Route::get('/blog/{id}', [BlogComponent::class, 'show'])->name('blog.show');
+
+Route::get('/finger-device', FingerDeviceComponent::class)->name('finger_device.index');
+
 
 
 
