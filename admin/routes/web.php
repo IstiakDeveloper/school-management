@@ -24,7 +24,10 @@ use App\Livewire\Admin\Website\VideoClassSectionComponent;
 use App\Livewire\Admin\Teacher\IndexComponent;
 use App\Livewire\Admin\Teacher\CreateComponent;
 use App\Livewire\Admin\Teacher\EditComponent;
-use App\Livewire\Admin\Teacher\ShowComponent;;
+use App\Livewire\Admin\Teacher\ShowComponent;
+use App\Livewire\AttendanceLogComponent;
+
+;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\FingerDeviceComponent;
@@ -46,6 +49,8 @@ Route::post('/', Logout::class)->name('logout');
 Route::get('/blog/{id}', [BlogComponent::class, 'show'])->name('blog.show');
 
 Route::get('/finger-device', FingerDeviceComponent::class)->name('finger_device.index');
+Route::get('/attendance-logs', AttendanceLogComponent::class)->name('attendance.logs');
+
 
 
 

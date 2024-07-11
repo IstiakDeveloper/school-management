@@ -32,19 +32,19 @@ return new class extends Migration
             $table->string('present_division');
             $table->string('present_district');
             $table->string('present_upazila');
-            $table->string('present_union');
+            $table->string('present_union')->nullable();
             $table->string('present_post_office');
-            $table->string('present_postal_code');
+            $table->string('present_postal_code')->nullable();
             $table->text('present_address');
             // Permanent Address
             $table->string('permanent_division');
             $table->string('permanent_district');
             $table->string('permanent_upazila');
-            $table->string('permanent_union');
+            $table->string('permanent_union')->nullable();
             $table->string('permanent_post_office');
-            $table->string('permanent_postal_code');
+            $table->string('permanent_postal_code')->nullable();
             $table->text('permanent_address');
-            $table->json('subjects_of_teaching');
+            $table->json('subjects_of_teaching')->nullable();
             $table->timestamps();
         });
     }

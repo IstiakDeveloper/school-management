@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Helpers\FingerHelper;
+use App\Models\AttendanceLog;
 use App\Models\FingerDevice;
 use App\Models\Teacher;
 use Illuminate\Validation\Rule;
@@ -157,7 +158,7 @@ class FingerDeviceComponent extends Component
             $uid = $teacher->id;
             $name = $teacher->name_en;
             // dd($name);
-            $result = $device->setUser($uid, $name, '', '0', '0');
+            $result = $device->setUser($uid, $uid, $name, '');
 
             if ($result === false) {
                 dd("Failed to add user {$teacher->name_en} with ID {$teacher->id}");
@@ -166,8 +167,6 @@ class FingerDeviceComponent extends Component
             $test[] = $result;
         }
 
-        dd($test);
-
         session()->flash('success', 'All Teachers added to the biometric device successfully!');
     }
 
@@ -175,27 +174,51 @@ class FingerDeviceComponent extends Component
 
     public function getAttendance()
     {
-        if (!$this->fingerDevice) {
-            session()->flash('error', 'Please select a biometric device first.');
-            return;
-        }
-
-        $device = new ZKTeco("192.168.1.238", 4370);
-        $device->connect();
-        // dd($device->connect());
+        $helper = new FingerHelper();
+        $device = $helper->init($this->fingerDevice->ip);
 
         if ($device->connect()) {
-            $this->attendanceLogs = $device->getAttendance();
-            $device->disconnect();
-            session()->flash('success', 'Attendance logs retrieved successfully!');
+            $attendanceLogs = $device->getAttendance();
+            $storedLogs = [];
+
+            foreach ($attendanceLogs as $log) {
+                // Check if the log already exists by uid
+                $existingLog = AttendanceLog::where('uid', $log['uid'])->first();
+
+                if (!$existingLog) {
+                    AttendanceLog::create([
+                        'teacher_id' => null, // Or any default value you choose for teacher_id
+                        'uid' => $log['uid'],
+                        'user_id' => $log['id'],
+                        'state' => $log['state'],
+                        'timestamp' => $log['timestamp'],
+                        'type' => $log['type'] == 1 ? 'Clock In' : 'Clock Out',
+                    ]);
+                    $storedLogs[] = $log; // Collect stored logs for debugging
+                    Log::info("Stored log for UID: {$log['uid']}");
+                } else {
+                    Log::info("Skipping duplicate log for UID: {$log['uid']}");
+                }
+            }
+
+            if (!empty($storedLogs)) {
+                session()->flash('success', 'Attendance logs retrieved and stored successfully!');
+            } else {
+                session()->flash('error', 'No new attendance logs were stored.');
+            }
         } else {
             session()->flash('error', 'Failed to connect to the device.');
         }
     }
+    
+
+    
 
 
     public function render()
     {
         return view('livewire.finger-device-component');
     }
+    
+
 }

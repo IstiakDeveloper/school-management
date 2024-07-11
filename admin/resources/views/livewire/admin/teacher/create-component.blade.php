@@ -12,17 +12,17 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block">Name (Bangla)*</label>
-                <input type="text" wire:model.live="name_bn" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="name_bn" class="w-full p-2 border rounded" >
                 @error('name_bn') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">Name (English)*</label>
-                <input type="text" wire:model.live="name_en" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="name_en" class="w-full p-2 border rounded" >
                 @error('name_en') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">Gender*</label>
-                <select wire:model.live="gender" class="w-full p-2 border rounded" required>
+                <select wire:model.live="gender" class="w-full p-2 border rounded" >
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -32,12 +32,12 @@
             </div>
             <div>
                 <label class="block">DOB*</label>
-                <input type="date" wire:model.live="dob" class="w-full p-2 border rounded" required>
+                <input type="date" wire:model.live="dob" class="w-full p-2 border rounded" >
                 @error('dob') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">Mobile Number*</label>
-                <input type="text" wire:model.live="mobile_number" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="mobile_number" class="w-full p-2 border rounded" >
                 @error('mobile_number') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
@@ -47,37 +47,60 @@
             </div>
             <div>
                 <label class="block">Designation*</label>
-                <input type="text" wire:model.live="designation" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="designation" class="w-full p-2 border rounded" >
                 @error('designation') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">First Joining*</label>
-                <input type="date" wire:model.live="first_joining" class="w-full p-2 border rounded" required>
+                <input type="date" wire:model.live="first_joining" class="w-full p-2 border rounded" >
                 @error('first_joining') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">Job Status*</label>
-                <input type="text" wire:model.live="job_status" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="job_status" class="w-full p-2 border rounded" >
                 @error('job_status') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block">Pin Number*</label>
-                <input type="text" wire:model.live="pin_number" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="pin_number" class="w-full p-2 border rounded" >
                 @error('pin_number') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
+
             <div>
-                <label class="block">Nationality*</label>
-                <input type="text" wire:model.live="nationality" class="w-full p-2 border rounded" required>
-                @error('nationality') <span class="text-red-500">{{ $message }}</span> @enderror
+                <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality*</label>
+                <select id="nationality" wire:model.live="nationality" 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('nationality') border-red-500 @enderror">
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Others">Others</option>
+                </select>
+                @error('nationality') <p class="text-sm text-red-500 mt-1">{{ $message }}</p> @enderror
             </div>
+    
+            @if ($nationality === 'Others')
+                <div>
+                    <label for="customNationality" wire:model.live="religion" class="block text-sm font-medium text-gray-700">Nationality Name*</label>
+                    <input id="customNationality" type="text" wire:model="customNationality" 
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('customNationality') border-red-500 @enderror">
+                    @error('customNationality') <p class="text-sm text-red-500 mt-1">{{ $message }}</p> @enderror
+                </div>
+            @endif    
+
+
             <div>
-                <label class="block">Religion*</label>
-                <input type="text" wire:model.live="religion" class="w-full p-2 border rounded" required>
-                @error('religion') <span class="text-red-500">{{ $message }}</span> @enderror
+                <label for="religion" class="block text-sm font-medium text-gray-700">Religion*</label>
+                <select id="religion" wire:model.live="religion" 
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('religion') border-red-500 @enderror">
+                    <option value="">Select Religion</option>
+                    <option value="Islam" @if(old('religion', $religion) === 'Islam') selected @endif>Islam</option>
+                    <option value="Hindu" @if(old('religion', $religion) === 'Hindu') selected @endif>Hindu</option>
+                </select>
+                @error('religion') <p class="text-sm text-red-500 mt-1">{{ $message }}</p> @enderror
             </div>
+            
+
             <div>
                 <label class="block">Blood Group*</label>
-                <input type="text" wire:model.live="blood_group" class="w-full p-2 border rounded" required>
+                <input type="text" wire:model.live="blood_group" class="w-full p-2 border rounded" >
                 @error('blood_group') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             
@@ -120,142 +143,150 @@
                 </div>
             </div>
         </div>
+        
 
-        <!-- Present Address -->
-        <h2 class="text-xl font-bold mb-2">Present Address</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-                <label class="block">Division*</label>
-                <select wire:model.live="present_division" class="w-full p-2 border rounded" required>
-                    <option value="">Select Division</option>
-                    @foreach ($locations['divisions'] as $division)
-                        <option value="{{ $division }}">{{ $division }}</option>
-                    @endforeach
-                </select>
-                @error('present_division') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">District*</label>
-                <select wire:model.live="present_district" class="w-full p-2 border rounded" required>
-                    <option value="">Select District</option>
-                    @if (isset($locations['districts'][$present_division]))
-                        @foreach ($locations['districts'][$present_division] as $district)
-                            <option value="{{ $district }}">{{ $district }}</option>
+        <div>
+            <h2 class="text-xl font-bold mb-2">Present Address</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block">Division*</label>
+                    <select wire:model.live="present_division" class="w-full p-2 border rounded">
+                        <option value="">Select Division</option>
+                        @foreach ($locations['divisions'] as $division)
+                            <option value="{{ $division }}">{{ $division }}</option>
                         @endforeach
-                    @endif
-                </select>
-                @error('present_district') <span class="text-red-500">{{ $message }}</span> @enderror
+                    </select>
+                    @error('present_division') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">District*</label>
+                    <select wire:model.live="present_district" class="w-full p-2 border rounded">
+                        <option value="">Select District</option>
+                        @if (isset($locations['districts'][$present_division]))
+                            @foreach ($locations['districts'][$present_division] as $district)
+                                <option value="{{ $district }}">{{ $district }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('present_district') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Upazila*</label>
+                    <select wire:model.live="present_upazila" class="w-full p-2 border rounded">
+                        <option value="">Select Upazila</option>
+                        @if (isset($locations['upazilas'][$present_district]))
+                            @foreach ($locations['upazilas'][$present_district] as $upazila)
+                                <option value="{{ $upazila }}">{{ $upazila }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('present_upazila') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Union</label>
+                    <input type="text" wire:model.live="present_union" class="w-full p-2 border rounded">
+                    @error('present_union') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Post Office*</label>
+                    <input type="text" wire:model.live="present_post_office" class="w-full p-2 border rounded">
+                    @error('present_post_office') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Postal Code</label>
+                    <input type="text" wire:model.live="present_postal_code" class="w-full p-2 border rounded">
+                    @error('present_postal_code') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Address*</label>
+                    <textarea wire:model.live="present_address" class="w-full p-2 border rounded"></textarea>
+                    @error('present_address') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
             </div>
 
-            <div>
-                <label class="block">Upazila*</label>
-                <select wire:model.live="present_upazila" class="w-full p-2 border rounded" required>
-                    <option value="">Select Upazila</option>
-                    @if (isset($locations['upazilas'][$present_district]))
-                        @foreach ($locations['upazilas'][$present_district] as $upazila)
-                            <option value="{{ $upazila }}">{{ $upazila }}</option>
+            <div class="flex items-center mb-4">
+                <input type="checkbox" wire:model.live="same_address" id="same_address" class="mr-2">
+                <label for="same_address">Same as Permanent Address</label>
+            </div>
+        
+            <h2 class="text-xl font-bold">Permanent Address</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block">Division*</label>
+                    <select wire:model.live="permanent_division" class="w-full p-2 border rounded">
+                        <option value="">Select Division</option>
+                        @foreach ($locations['divisions'] as $division)
+                            <option value="{{ $division }}">{{ $division }}</option>
                         @endforeach
-                    @endif
-                </select>
-                @error('present_upazila') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">Union*</label>
-                <input type="text" wire:model.live="present_union" class="w-full p-2 border rounded" required>
-                @error('present_union') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label class="block">Post Office*</label>
-                <input type="text" wire:model.live="present_post_office" class="w-full p-2 border rounded" required>
-                @error('present_post_office') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label class="block">Postal Code*</label>
-                <input type="text" wire:model.live="present_postal_code" class="w-full p-2 border rounded" required>
-                @error('present_postal_code') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label class="block">Address*</label>
-                <textarea wire:model.live="present_address" class="w-full p-2 border rounded" required></textarea>
-                @error('present_address') <span class="text-red-500">{{ $message }}</span> @enderror
+                    </select>
+                    @error('permanent_division') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">District*</label>
+                    <select wire:model.live="permanent_district" class="w-full p-2 border rounded">
+                        <option value="">Select District</option>
+                        @if (isset($locations['districts'][$permanent_division]))
+                            @foreach ($locations['districts'][$permanent_division] as $district)
+                                <option value="{{ $district }}">{{ $district }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('permanent_district') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Upazila*</label>
+                    <select wire:model.live="permanent_upazila" class="w-full p-2 border rounded">
+                        <option value="">Select Upazila</option>
+                        @if (isset($locations['upazilas'][$permanent_district]))
+                            @foreach ($locations['upazilas'][$permanent_district] as $upazila)
+                                <option value="{{ $upazila }}">{{ $upazila }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('permanent_upazila') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Union</label>
+                    <input type="text" wire:model.live="permanent_union" class="w-full p-2 border rounded">
+                    @error('permanent_union') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Post Office*</label>
+                    <input type="text" wire:model.live="permanent_post_office" class="w-full p-2 border rounded">
+                    @error('permanent_post_office') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Postal Code</label>
+                    <input type="text" wire:model.live="permanent_postal_code" class="w-full p-2 border rounded">
+                    @error('permanent_postal_code') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+        
+                <div>
+                    <label class="block">Address*</label>
+                    <textarea wire:model.live="permanent_address" class="w-full p-2 border rounded"></textarea>
+                    @error('permanent_address') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
             </div>
         </div>
-
-        <!-- Permanent Address -->
-        <h2 class="text-xl font-bold">Permanent Address</h2>'
-        <div class="mb-6 flex items-center">
-            <input type="checkbox" wire:model.live="same_address" id="same_address">
-            <label for="same_address" class="ml-2">Same as Present Address</label>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-                <label class="block">Division*</label>
-                <select wire:model.live="permanent_division" class="w-full p-2 border rounded" required>
-                    <option value="">Select Division</option>
-                    @foreach ($locations['divisions'] as $division)
-                        <option value="{{ $division }}">{{ $division }}</option>
-                    @endforeach
-                </select>
-                @error('permanent_division') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">District*</label>
-                <select wire:model.live="permanent_district" class="w-full p-2 border rounded" required>
-                    <option value="">Select District</option>
-                    @if (isset($locations['districts'][$permanent_division]))
-                        @foreach ($locations['districts'][$permanent_division] as $district)
-                            <option value="{{ $district }}">{{ $district }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                @error('permanent_district') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">Upazila*</label>
-                <select wire:model.live="permanent_upazila" class="w-full p-2 border rounded" required>
-                    <option value="">Select Upazila</option>
-                    @if (isset($locations['upazilas'][$permanent_district]))
-                        @foreach ($locations['upazilas'][$permanent_district] as $upazila)
-                            <option value="{{ $upazila }}">{{ $upazila }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                @error('permanent_upazila') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">Union*</label>
-                <input type="text" wire:model.live="permanent_union" class="w-full p-2 border rounded" required>
-                @error('permanent_union') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block">Post Office*</label>
-                <input type="text" wire:model.live="permanent_post_office" class="w-full p-2 border rounded" required>
-                @error('permanent_post_office') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label class="block">Postal Code*</label>
-                <input type="text" wire:model.live="permanent_postal_code" class="w-full p-2 border rounded" required>
-                @error('permanent_postal_code') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label class="block">Address*</label>
-                <textarea wire:model.live="permanent_address" class="w-full p-2 border rounded" required></textarea>
-                @error('permanent_address') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-        </div>
+        
 
         <!-- Subjects of Teaching -->
         <h2 class="text-xl font-bold mb-2">Subjects of Teaching</h2>
         <div class="mb-4">
-            <label class="block mb-2">Subjects*</label>
+            <label class="block mb-2">Subjects (optional)</label>
             <div class="flex flex-wrap gap-2">
-                @foreach(['ইংরেজি', 'গণিত', 'প্রাথমিক বিজ্ঞান', 'বাংলাদেশ ও বিশ্বপরিচয়', 'ইসলাম ধর্ম ও নৈতিক শিক্ষা', 'হিন্দুধর্ম ও নৈতিক শিক্ষা'] as $subject)
+                @foreach(['বাংলা', 'ইংরেজি', 'গণিত', 'প্রাথমিক বিজ্ঞান', 'বাংলাদেশ ও বিশ্বপরিচয়', 'ইসলাম ধর্ম ও নৈতিক শিক্ষা', 'হিন্দুধর্ম ও নৈতিক শিক্ষা'] as $subject)
                 <label class="inline-flex items-center">
                     <input type="checkbox" value="{{ $subject }}" wire:model.live="subjects_of_teaching" class="form-checkbox h-5 w-5 text-green-600">
                     <span class="ml-2">{{ $subject }}</span>
@@ -272,27 +303,27 @@
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
                 <div>
                     <label class="block">Degree*</label>
-                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.degree" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.degree" class="w-full p-2 border rounded" >
                     @error('educational_qualifications.' . $index . '.degree') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Subject*</label>
-                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.subject" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.subject" class="w-full p-2 border rounded" >
                     @error('educational_qualifications.' . $index . '.subject') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Board*</label>
-                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.board" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.board" class="w-full p-2 border rounded" >
                     @error('educational_qualifications.' . $index . '.board') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Passing Year*</label>
-                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.passing_year" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.passing_year" class="w-full p-2 border rounded" >
                     @error('educational_qualifications.' . $index . '.passing_year') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Grade*</label>
-                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.grade" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="educational_qualifications.{{ $index }}.grade" class="w-full p-2 border rounded" >
                     @error('educational_qualifications.' . $index . '.grade') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end">
@@ -308,17 +339,17 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div>
                     <label class="block">Training Details*</label>
-                    <input type="text" wire:model.live="training_information.{{ $index }}.training_details" class="w-full p-2 border rounded" required>
+                    <input type="text" wire:model.live="training_information.{{ $index }}.training_details" class="w-full p-2 border rounded" >
                     @error('training_information.' . $index . '.training_details') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Training Start Date*</label>
-                    <input type="date" wire:model.live="training_information.{{ $index }}.training_start_date" class="w-full p-2 border rounded" required>
+                    <input type="date" wire:model.live="training_information.{{ $index }}.training_start_date" class="w-full p-2 border rounded" >
                     @error('training_information.' . $index . '.training_start_date') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block">Training End Date*</label>
-                    <input type="date" wire:model.live="training_information.{{ $index }}.training_end_date" class="w-full p-2 border rounded" required>
+                    <input type="date" wire:model.live="training_information.{{ $index }}.training_end_date" class="w-full p-2 border rounded" >
                     @error('training_information.' . $index . '.training_end_date') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end">

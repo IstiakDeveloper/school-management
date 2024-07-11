@@ -38,7 +38,7 @@
                 </a>
 
                 <div id="school-dropdown" class="dropdown {{ request()->is('classes', 'admissions', 'subjects.index', 'student-results.index', 'student.attendance') ? 'active' : '' }}">
-                    <a href="#" id="school-toggle" class="flex items-center cursor-pointer dropdown-toggle">
+                    <a href="#" id="school-toggle" class="flex items-center cursor-pointer dropdown-toggle {{ request()->is('classes', 'admissions', 'subjects.index', 'student-results.index', 'student.attendance') ? 'active' : '' }}">
                         <span class="material-icons-sharp  text-sm">
                             school
                         </span>
@@ -184,6 +184,21 @@
                         </a>
                     </div>
                 </div>
+
+                <a href="{{ route('attendance.logs') }}" class="{{ request()->routeIs('attendance.logs') ? 'active' : '' }}">
+                    <span class="material-icons-sharp">
+                        add_to_queue
+                    </span>
+                    <h3>Attendance Log</h3>
+                </a>
+
+
+                <a href="{{ route('finger_device.index') }}" class="{{ request()->routeIs('finger_device.index') ? 'active' : '' }}">
+                    <span class="material-icons-sharp">
+                        fingerprint
+                    </span>
+                    <h3>Biomatric Device</h3>
+                </a>
 
                 
 

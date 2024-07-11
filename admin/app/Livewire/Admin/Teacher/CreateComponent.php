@@ -15,7 +15,7 @@ class CreateComponent extends Component
     use WithFileUploads;
     
     public $photo;
-    public $name_bn, $name_en, $gender, $dob, $mobile_number, $email, $designation, $first_joining, $job_status, $pin_number, $nationality, $religion, $blood_group, $signature;
+    public $name_bn, $name_en, $gender, $dob, $mobile_number, $email, $designation, $first_joining, $job_status, $pin_number, $religion, $blood_group, $signature;
     public $present_division, $present_district, $present_upazila, $present_union, $present_post_office, $present_postal_code, $present_address;
     public $permanent_division, $permanent_district, $permanent_upazila, $permanent_union, $permanent_post_office, $permanent_postal_code, $permanent_address;
     public $subjects_of_teaching = [];
@@ -23,6 +23,8 @@ class CreateComponent extends Component
     public $training_information = [];
     public $same_address = false;
     public $locations;
+    public $nationality = 'Bangladesh';
+    public $customNationality = '';
 
     public function mount()
     {
@@ -104,18 +106,18 @@ class CreateComponent extends Component
             'present_division' => 'required|string',
             'present_district' => 'required|string',
             'present_upazila' => 'required|string',
-            'present_union' => 'required|string',
+            'present_union' => 'nullable|string',
             'present_post_office' => 'required|string',
-            'present_postal_code' => 'required|string',
+            'present_postal_code' => 'nullable|string',
             'present_address' => 'required|string',
             'permanent_division' => 'required|string',
             'permanent_district' => 'required|string',
             'permanent_upazila' => 'required|string',
-            'permanent_union' => 'required|string',
+            'permanent_union' => 'nullable|string',
             'permanent_post_office' => 'required|string',
-            'permanent_postal_code' => 'required|string',
+            'permanent_postal_code' => 'nullable|string',
             'permanent_address' => 'required|string',
-            'subjects_of_teaching' => 'required|array',
+            'subjects_of_teaching' => 'nullable|array',
             'educational_qualifications.*.degree' => 'required|string',
             'educational_qualifications.*.subject' => 'required|string',
             'educational_qualifications.*.board' => 'required|string',
@@ -140,7 +142,7 @@ class CreateComponent extends Component
             'first_joining' => $this->first_joining,
             'job_status' => $this->job_status,
             'pin_number' => $this->pin_number,
-            'nationality' => $this->nationality,
+            'nationality' => $this->nationality === 'Others' ? $this->customNationality : $this->nationality,
             'religion' => $this->religion,
             'blood_group' => $this->blood_group,
             'signature' => $signaturePath,
@@ -186,6 +188,13 @@ class CreateComponent extends Component
         return redirect()->route('teachers.index');
     }
 
+    public function updatedNationality($value)
+    {
+        if ($value !== 'Others') {
+            $this->customNationality = '';
+        }
+    }
+    
     public function render()
     {
         return view('livewire.admin.teacher.create-component');
