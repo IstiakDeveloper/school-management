@@ -1,3 +1,7 @@
+body{
+    font-family: "Tiro Bangla", serif;
+}
+
 .bg-image-1{
     background: url('/images/background-images/bg-image-1.jpg') no-repeat;
     position: relative;
@@ -31,5 +35,7 @@ header nav .active{
     text-decoration-line: underline;
     text-underline-offset: 8px;
 }
+
+
 
 

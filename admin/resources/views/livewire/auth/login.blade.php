@@ -2,7 +2,7 @@
     <div class="login-box">
         <div class="login-form">
             <h1 class="text-2xl font-bold mb-2 text-center">Login</h1>
-            <p class="text-gray-500 mb-6 text-center">How do I get started blazein dolor at?</p>
+            <p class="text-gray-500 mb-6 text-center">Login to manage this school</p>
             <form wire:submit.prevent="login">
                 <!-- Email Address or Phone Number -->
                 <div class="mb-4">
@@ -32,8 +32,8 @@
             </form>
         </div>
         <div class="login-image">
-            <img src="https://via.placeholder.com/150" alt="Profile Image" class="w-36 h-36">
-            <h2 class="text-xl font-bold mt-2">Build your team and improve yourself with the blazein app</h2>
+            <img src="{{asset('logo.jpg')}}" alt="Profile Image" class="w-36 h-36">
+            <h2 class="text-xl font-bold mt-2">Build your team and improve your school performance</h2>
         </div>
     </div>
 </div>

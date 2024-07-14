@@ -56,6 +56,12 @@ body{
     background-color: var(--color-background);
 }
 
+
+
+  body[lang='bn'] {
+    font-family: 'Tiro Bangla', sans-serif;
+  }
+
 a{
     color: var(--color-dark);
 }

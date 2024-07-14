@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Mousumi Biddyanikaton | 2024</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 
 </head>
 <body>
