@@ -20,7 +20,7 @@
                                 <a href="{{$heroSection['link1_url']}}">
                                     <button class="bg-orange-500 hover:bg-transparent hover:border hover:border-gray-300 py-4 px-4 rounded min-w-[120px]">{{$heroSection['link1_text']}}</button>
                                 </a>
-                                <a class="border border-gray-300 py-3 px-4 rounded hover:bg-orange-500 w-[155px] flex gap-2" href="{{$heroSection['link2_url']}}">
+                                <a class="border border-gray-300 py-3 px-4 rounded hover:bg-orange-500 w-[155px] flex gap-2 items-center justify-center" href="{{$heroSection['link2_url']}}">
                                     {{$heroSection['link2_text']}} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-play"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                                 </a>
                             </div>
@@ -47,6 +47,7 @@
                         <div class="img">
                             <img class="w-[400px] h-[300px] object-cover" src="{{ asset('storage/' . $heroSection['service2_image']) }}" alt="">
                         </div>
+                        
                         <div class="text py-6">
                             <h1 class="font-bold">{{$heroSection['service2_title']}}</h1>
                             <span class="flex justify-center">
@@ -74,38 +75,38 @@
         </section>
 
 
-        <section class="bg-green-700">
+        <section id="smartWay" class="bg-green-700">
             <div class="container mx-auto flex flex-col gap-6 md:gap-20 justify-between items-center md:flex-row py-16 px-8 md:px-8">
                 <div>
-                    <img class="max-h-[450px]" src="images/female-student.png" alt="">
+                    <img class="max-h-[450px]" src="{{asset('smart.jpg')}}" alt="">
                 </div>
                 <div class="text-white text-justify w-2/3 md:w-2/4">
-                    <h3 class="text-2xl text-center md:text-left md:text-4xl font-bold">Smarter way to go through your school</h3>
-                    <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat nemo saepe consequatur iure aut dolore ut adipisci molestias dignissimos impedit.</p>
+                    <h3 class="text-2xl text-center md:text-left md:text-4xl font-bold">Smarter Ways to Navigate Our School</h3>
+                    <p class="mt-4">Tailored Educational Experiences</p>
                     <h3 class="mt-6 flex">
                         <span class="mt-1 mr-2 text-orange-500">
                             <x-lucide-circle-check-big class="h-5 w-5"/>
                         </span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, similique!
+                        Our innovative approach ensures each student receives a customized learning path designed to fit their unique strengths and needs. From individualized lesson plans to specialized support, we focus on maximizing each student’s potential.
                     </h3>
                     <h3 class="mt-4 flex">
                         <span class="mt-1 mr-2 text-orange-500">
                             <x-lucide-circle-check-big class="h-5 w-5"/>
                         </span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+                        Explore our cutting-edge classrooms, labs, and extracurricular spaces that provide students with the tools and environment they need to thrive. Our modern facilities support a wide range of activities and learning opportunities.</h3>
                     <h3 class="mt-4 flex">
                         <span class="mt-1 mr-2 text-orange-500">
                             <x-lucide-circle-check-big class="h-5 w-5"/>
                         </span>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, expedita.
+                  We believe in fostering a supportive community where students, parents, and teachers collaborate closely. Our active parent-teacher associations and community events create a cohesive network dedicated to student success.
                     </h3>
-                    <p class="mt-6 md:mt-10 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus voluptatum voluptas fuga architecto praesentium aliquam iores!</p>
+                    <p class="mt-6 md:mt-10 ">Modern Resources for Enhanced Learning</p>
                 </div>
             </div>
         </section>
 
         <!-- Courses -->
-        <section class="bg-gray-50 px-8 py-8 md:py-12 md:px-8">
+        <section id="videoClass" class="bg-gray-50 px-8 py-8 md:py-12 md:px-8">
             <div class="text-center">
                 <h1 class="text-5xl font-bold">{{$videoClassesSection['main_title']}}</h1>
                 <p class="mt-4">{{$videoClassesSection['description']}}</p>
@@ -163,7 +164,7 @@
         </section>
 
         <!-- Video -->
-        <section class="mt-20">
+        <section id="smartVideo" class="mt-20">
             <div class="h-[500px]" style="
             background: url('{{ asset('storage/' . $smarterLearnerSection['background_image']) }}') no-repeat;
             position: relative;
@@ -178,12 +179,28 @@
                 </div>
             </div>
             <div class="flex items-center justify-center relative bottom-44 lg:bottom-52">
-                <iframe class="max-w-[600px] lg:w-[800px] h-[300px] lg:h-[400px]" src="{{$smarterLearnerSection['video_url']}}" frameborder="0" allowfullscreen></iframe>
+
+                @php
+                    // Extract the video ID from the URL
+                    $videoUrl = $smarterLearnerSection['video_url'];
+                    $videoId = null;
+
+                    // Regular expression to extract YouTube video ID
+                    if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i', $videoUrl, $matches)) {
+                        $videoId = $matches[1];
+                    }
+                @endphp
+
+                @if($videoId)
+                    <iframe class="max-w-[600px] lg:w-[800px] h-[300px] lg:h-[400px]" src="https://www.youtube.com/embed/{{ $videoId }}" frameborder="0" allowfullscreen></iframe>
+                @else
+                    <p>Invalid video URL</p>
+                @endif
             </div>
         </section>
 
         <!-- Review Students -->
-        <section class="container mx-auto -mt-32">
+        <section id="review" class="container mx-auto -mt-32">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 items-center">
                     <div>
                         <h2 class="text-3xl font-bold text-center text-orange-500">{{$smarterLearnerSection['item1_number']}}+</h2>
@@ -248,6 +265,7 @@
                             <p>Student</p>
                             </div>
                         </div> --}}
+                        
                     </div>
                 </div>
                 <!-- Indicator Buttons -->
@@ -261,7 +279,7 @@
         </section>
 
         <!-- Events -->
-        <section class="mt-20">
+        <section id="blogs" class="mt-20">
             <div class="bg-cover bg-center md:h-[800px] relative px-8 py-8 md:px-8 md:mb-12" style="
             background: url('{{ asset('storage/' . $blogSection->background_image) }}') no-repeat;
             position: relative;
@@ -281,7 +299,7 @@
                             <div class="pb-20">
                                 @if ($latestBlog)
                                     <a href="{{ route('blog.show', $latestBlog->id) }}">
-                                        <img class="w-[500px] h-[300px] object-cover" src="{{ Storage::disk('public')->url($latestBlog->thumbnail) }}" alt="{{ $latestBlog->title }}">
+                                        <img class="w-[500px] h-[300px] object-cover" src="{{ asset('storage/' . $latestBlog->thumbnail) }}" alt="{{ $latestBlog->title }}">
                                         <h3 class="text-white mt-5">{{ $latestBlog->created_at->format('d F Y | h:i A') }}</h3>
                                         <h1 class="text-2xl text-white font-bold">{{ $latestBlog->title }}</h1>
                                         <button class="bg-orange-500 text-white hover:bg-gray-600 py-3 px-4 rounded mt-6">Read More</button>
@@ -292,16 +310,29 @@
                             </div>
 
                             <div class="pb-20">
-                                @foreach ($lastFiveBlogs as $blog)
+                                @php
+                                    $blogsToShow = $lastFiveBlogs->take(4); // Take only the first 4 blogs
+                                @endphp
+                            
+                                @foreach ($blogsToShow as $blog)
                                     <a href="{{ route('blog.show', $blog->id) }}" class="flex flex-row justify-center items-center gap-4 mb-4">
-                                        <img class="w-[100px] h-[90px] object-cover" src="{{ Storage::disk('public')->url($blog->thumbnail) }}" alt="{{ $blog->title }}">
+                                        <img class="w-[100px] h-[90px] object-cover" src="{{ asset('storage/' . $blog->thumbnail) }}" alt="{{ $blog->title }}">
                                         <div class="text-white font-semibold md:ml-3">
-                                            <h1 class="text-[10px] sm:text-[16px] mt-2">{{ $blog->title }}</h1>
+                                            <h1 class="text-[10px] sm:text-[16px] mt-2">
+                                                {{ \Illuminate\Support\Str::limit($blog->title, 15, '...') }}
+                                            </h1>
                                             <h3 class="mt-2 text-xs">{{ $blog->created_at->format('d F Y | h:i A') }}</h3>
                                         </div>
                                     </a>
                                 @endforeach
+                            
+                                <div class="text-center mt-4">
+                                    <a href="#" class="inline-block px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                                        Show All
+                                    </a>
+                                </div>
                             </div>
+                            
 
                         </div>
                     </div>
@@ -310,12 +341,12 @@
         </section>
 
         <!-- Joining Massage -->
-        <section>
+        <section id="contactUs">
             <div class="container text-center mx-auto my-12">
                 <div class="bg-green-700 text-white flex flex-col justify-center items-center py-20">
-                    <h1 class="text-2xl font-semibold">Join Over 4500+ Courses</h1>
-                    <p class="mt-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, assumenda!</p>
-                    <button class="bg-orange-500 text-white hover:bg-indigo-600 py-3 px-4 rounded mt-6">Apply Now</button>
+                    <h1 class="text-2xl font-semibold">Join Our School Family!</h1>
+                    <p class="mt-5"> Experience a nurturing community where every child’s potential is valued. Start your application today!"</p>
+                    <button class="bg-orange-500 text-white hover:bg-indigo-600 py-3 px-4 rounded mt-6">Contact Us</button>
                 </div>
             </div>
         </section>

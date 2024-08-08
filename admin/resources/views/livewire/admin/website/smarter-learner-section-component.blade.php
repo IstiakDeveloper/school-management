@@ -26,7 +26,7 @@
             @if ($background_image)
                 <img src="{{ $background_image->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif ($background_image_path)
-                <img src="{{ Storage::disk('public')->url($background_image_path) }}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $background_image_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('background_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>

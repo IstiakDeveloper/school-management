@@ -13,13 +13,17 @@ class AttendanceLog extends Model
         'teacher_id',
         'uid',
         'user_id',
+        'name',
         'state',
         'timestamp',
-        'type',
+        'clock_in',
+        'clock_out'
     ];
+
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
+    
 }

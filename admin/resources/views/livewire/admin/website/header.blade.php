@@ -21,7 +21,7 @@
             @if ($logo)
                 <img src="{{ $logo->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif($logo_path)
-                <img src="{{ Storage::disk('public')->url($logo_path)}}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $logo_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('logo') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>

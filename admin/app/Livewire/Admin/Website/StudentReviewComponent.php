@@ -19,7 +19,7 @@ class StudentReviewComponent extends Component
         'main_title' => 'required|string|max:255',
         'description' => 'required|string|max:1000',
         'reviews.*.stars' => 'required|integer|between:1,5',
-        'reviews.*.summary' => 'nullable|string|max:255',
+        'reviews.*.summary' => 'nullable',
         'reviews.*.name' => 'required|string|max:255',
     ];
 
@@ -58,7 +58,7 @@ class StudentReviewComponent extends Component
     {
         $this->validate([
             'review_stars' => 'required|integer|between:1,5',
-            'review_summary' => 'nullable|string|max:255',
+            'review_summary' => 'nullable|string',
             'review_name' => 'required|string|max:255',
         ]);
 

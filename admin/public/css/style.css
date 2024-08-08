@@ -37,5 +37,41 @@ header nav .active{
 }
 
 
+@keyframes spinZoom {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+#loadingOverlay {
+    display: none; /* Initially hidden */
+}
+
+#loadingOverlay.show {
+    display: flex; /* Show when the class 'show' is added */
+}
+
+#loadingImage {
+    animation: spinZoom 2s linear infinite; /* Apply spinning and zooming animation */
+}
+
+
+
+#backToTop {
+    display: none; /* Initially hidden */
+}
+
+#backToTop.show {
+    display: block; /* Show when the class 'show' is added */
+}
+
+
+
 
 

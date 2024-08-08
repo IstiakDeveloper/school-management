@@ -34,11 +34,21 @@ use App\Livewire\FingerDeviceComponent;
 use App\Livewire\RP\PermissionManager;
 use App\Livewire\RP\RoleManager;
 use App\Livewire\RP\UserManager;
+use App\Livewire\TeacherAttendanceManager;
 use App\Livewire\User\HomeComponent;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
+Route::get('/storage-link', function () {
+    try {
+        Artisan::call('storage:link');
+        return "The [public/storage] directory has been linked.";
+    } catch (\Exception $e) {
+        return "There was an error: " . $e->getMessage();
+    }
+})->name('storage.link');
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', Register::class)->name('register');
@@ -49,7 +59,7 @@ Route::post('/', Logout::class)->name('logout');
 Route::get('/blog/{id}', [BlogComponent::class, 'show'])->name('blog.show');
 
 Route::get('/finger-device', FingerDeviceComponent::class)->name('finger_device.index');
-Route::get('/attendance-logs', AttendanceLogComponent::class)->name('attendance.logs');
+
 
 
 
@@ -94,6 +104,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/teachers/{teacher}/edit', EditComponent::class)->name('teachers.edit');
     Route::get('/teachers/{teacher}', ShowComponent::class)->name('teachers.show');
 
+    Route::get('/attendance-logs', AttendanceLogComponent::class)->name('attendance.logs');
+    Route::get('/teacher-attendance', TeacherAttendanceManager::class)->name('teacher.attendance');
+
+    Route::get('/download-pdf/{filename}', function ($filename) {
+        $filePath = storage_path('app/public/pdf/' . $filename);
+        return response()->download($filePath);
+    })->name('download-pdf');
 
 
 

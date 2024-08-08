@@ -13,6 +13,21 @@
 </head>
 <body>
 
+        <!-- Loading Animation -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div class="flex items-center">
+            <img id="loadingImage" class="w-12" src="{{ asset('logo.png') }}" alt="Loading">
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-4 right-4 bg-green-700 text-white p-3 rounded-full shadow-lg hover:bg-green-900 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 15l-7-7-7 7" />
+        </svg>
+    </button>
+
+
     <header class="bg-green-700 px-8 py-4 md:py-4 md:px-8">
         <div class="container mx-auto flex items-center justify-between">
             <!-- Logo -->
@@ -21,9 +36,10 @@
             <nav id="desktopNav" class="hidden md:flex items-center">
                 <ul class="flex space-x-12 transition ease-in-out">
                     <li><a href="#" class="active text-white hover:underline hover:underline-offset-8">Home</a></li>
-                    <li><a href="#" class="text-white hover:underline hover:underline-offset-8 ">About</a></li>
-                    <li><a href="#" class="text-white hover:underline hover:underline-offset-8 ">Services</a></li>
-                    <li><a href="#" class="text-white hover:underline hover:underline-offset-8 ">Contact</a></li>
+                    <li><a href="#smartWay" class="text-white hover:underline hover:underline-offset-8 ">About</a></li>
+                    <li><a href="#review" class="text-white hover:underline hover:underline-offset-8 ">Reviews</a></li>
+                    <li><a href="#blogs" class="text-white hover:underline hover:underline-offset-8 ">Blogs</a></li>
+                    <li><a href="#contactUs" class="text-white hover:underline hover:underline-offset-8 ">Contact</a></li>
                 </ul>
             </nav>
             <!-- Mobile Navigation Toggle -->
@@ -129,7 +145,7 @@
                 <nav class="py-4">
                     <div class="container mx-auto flex justify-between items-center  px-8 py-8 md:py-12 md:px-8">
                         <!-- Logo -->
-                        <a href="#" class="text-white">&copy;2024 dorik.com</a>
+                        <a href="#" class="text-white">&copy;2024 Mousumibd.org</a>
                         <!-- Navbar links -->
                         <ul class="flex">
                             <li><a href="#" class="text-white hover:text-gray-500 lg:ml-5">Privacy Policy</a></li>
@@ -142,6 +158,6 @@
 
     </footer>
 
-<script src="script/script.js"></script>
+<script src="{{asset('frontIndex.js')}}"></script>
 </body>
 </html>

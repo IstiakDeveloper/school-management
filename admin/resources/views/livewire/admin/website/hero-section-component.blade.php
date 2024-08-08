@@ -55,7 +55,7 @@
             @if ($service1_image)
                 <img src="{{ $service1_image->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif ($service1_image_path)
-                <img src="{{ Storage::disk('public')->url($service1_image_path) }}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $service1_image_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('service1_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>
@@ -72,7 +72,7 @@
             @if ($service2_image)
                 <img src="{{ $service2_image->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif ($service2_image_path)
-                <img src="{{ Storage::disk('public')->url($service2_image_path) }}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $service2_image_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('service2_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>
@@ -89,7 +89,7 @@
             @if ($service3_image)
                 <img src="{{ $service3_image->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif ($service3_image_path)
-                <img src="{{ Storage::disk('public')->url($service3_image_path) }}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $service3_image_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('service3_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>
@@ -100,7 +100,7 @@
             @if ($background_image)
                 <img src="{{ $background_image->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover">
             @elseif ($background_image_path)
-                <img src="{{ Storage::disk('public')->url($background_image_path) }}" class="mt-2 w-32 h-32 object-cover">
+                <img src="{{ asset('storage/' . $background_image_path) }}" class="mt-2 w-32 h-32 object-cover">
             @endif
             @error('background_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </div>
