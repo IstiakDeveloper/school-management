@@ -173,10 +173,10 @@
             background-position: center;
             background-size: cover;
         ">
-                <div class="flex flex-col items-center text-white conatiner mx-auto">
-                    <h1 class="text-3xl text-center font-bold mt-20">{{$smarterLearnerSection['main_title']}}</h1>
-                    <p class="text-center mt-4">{{$smarterLearnerSection['description']}}</p>
-                </div>
+            <div class="flex flex-col items-center text-white container mx-auto">
+                <h1 class="text-3xl text-center font-bold mt-20">{{$smarterLearnerSection['main_title']}}</h1>
+                <p class="text-center mt-4">{{$smarterLearnerSection['description']}}</p>
+            </div>
             </div>
             <div class="flex items-center justify-center relative bottom-44 lg:bottom-52">
 

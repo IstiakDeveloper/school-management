@@ -1,4 +1,3 @@
-// Show loading overlay
 document.addEventListener('DOMContentLoaded', () => {
     const loadingOverlay = document.getElementById('loadingOverlay');
     loadingOverlay.classList.add('show');
@@ -6,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulate a delay for demonstration purposes (remove this in production)
     setTimeout(() => {
         loadingOverlay.classList.remove('show');
-    }, 2000); // 3 seconds delay
+    }, 2000); // 2 seconds delay
 });
-
 
 
 // Back to Top Button

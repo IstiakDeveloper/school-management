@@ -3,75 +3,35 @@
 namespace App\Livewire\Admin\Teacher;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Teacher;
 use App\Models\EducationalQualification;
 use App\Models\TrainingInformation;
-use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class EditComponent extends Component
 {
     use WithFileUploads;
-
+    
     public $teacher;
-    public $name_bn;
-    public $name_en;
-    public $gender;
-    public $dob;
-    public $mobile_number;
-    public $email;
-    public $designation;
-    public $first_joining;
-    public $job_status;
-    public $pin_number;
-    public $nationality;
-    public $religion;
-    public $blood_group;
+    public $photo;
     public $signature;
-    public $present_address;
-    public $permanent_address;
-    public $subjects_of_teaching;
-    public $educations = [];
-    public $trainings = [];
+    public $name_bn, $name_en, $gender, $dob, $mobile_number, $email, $designation, $first_joining, $job_status, $pin_number, $religion, $blood_group;
+    public $present_division, $present_district, $present_upazila, $present_union, $present_post_office, $present_postal_code, $present_address;
+    public $permanent_division, $permanent_district, $permanent_upazila, $permanent_union, $permanent_post_office, $permanent_postal_code, $permanent_address;
+    public $subjects_of_teaching = [];
+    public $educational_qualifications = [];
+    public $training_information = [];
+    public $same_address = false;
+    public $locations;
+    public $nationality = 'Bangladesh';
+    public $customNationality = '';
 
-    protected $rules = [
-        'name_bn' => 'required|string',
-        'name_en' => 'required|string',
-        'gender' => 'required|in:Male,Female,Other',
-        'dob' => 'required|date',
-        'mobile_number' => 'required|string',
-        'email' => 'nullable|email',
-        'designation' => 'required|string',
-        'first_joining' => 'required|date',
-        'job_status' => 'nullable|string',
-        'pin_number' => 'required|string',
-        'nationality' => 'nullable|string',
-        'religion' => 'nullable|string',
-        'blood_group' => 'nullable|string',
-        'signature' => 'nullable|image|max:1024', // Example validation for image upload
-        'present_address' => 'required|array',
-        'present_address.division' => 'required|string',
-        'present_address.district' => 'required|string',
-        'present_address.upazila' => 'required|string',
-        'permanent_address' => 'required|array',
-        'permanent_address.division' => 'required|string',
-        'permanent_address.district' => 'required|string',
-        'permanent_address.upazila' => 'required|string',
-        'subjects_of_teaching' => 'required|array',
-        'educations.*.degree' => 'required|string',
-        'educations.*.subject' => 'required|string',
-        'educations.*.board' => 'required|string',
-        'educations.*.passing_year' => 'required|integer',
-        'educations.*.grade' => 'nullable|string',
-        'trainings.*.training_details' => 'required|string',
-        'trainings.*.start_date' => 'required|date',
-        'trainings.*.end_date' => 'required|date',
-    ];
-
-    public function mount($teacher)
+    public function mount($teacherId)
     {
-        $this->teacher = Teacher::findOrFail($teacher);
+        $this->teacher = Teacher::findOrFail($teacherId);
 
-        // Initialize properties from $this->teacher
+        // Load teacher data into form fields
         $this->name_bn = $this->teacher->name_bn;
         $this->name_en = $this->teacher->name_en;
         $this->gender = $this->teacher->gender;
@@ -83,26 +43,79 @@ class EditComponent extends Component
         $this->job_status = $this->teacher->job_status;
         $this->pin_number = $this->teacher->pin_number;
         $this->nationality = $this->teacher->nationality;
+        $this->customNationality = $this->teacher->nationality === 'Others' ? $this->teacher->nationality : '';
         $this->religion = $this->teacher->religion;
         $this->blood_group = $this->teacher->blood_group;
-        $this->signature = $this->teacher->signature;
-        $this->present_address = json_decode($this->teacher->present_address, true);
-        $this->permanent_address = json_decode($this->teacher->permanent_address, true);
-        $this->subjects_of_teaching = json_decode($this->teacher->subjects_of_teaching, true);
-        $this->educations = json_decode($this->teacher->educations, true) ?? [];
-        $this->trainings = json_decode($this->teacher->trainings, true) ?? [];
+        $this->present_division = $this->teacher->present_division;
+        $this->present_district = $this->teacher->present_district;
+        $this->present_upazila = $this->teacher->present_upazila;
+        $this->present_union = $this->teacher->present_union;
+        $this->present_post_office = $this->teacher->present_post_office;
+        $this->present_postal_code = $this->teacher->present_postal_code;
+        $this->present_address = $this->teacher->present_address;
+        $this->permanent_division = $this->teacher->permanent_division;
+        $this->permanent_district = $this->teacher->permanent_district;
+        $this->permanent_upazila = $this->teacher->permanent_upazila;
+        $this->permanent_union = $this->teacher->permanent_union;
+        $this->permanent_post_office = $this->teacher->permanent_post_office;
+        $this->permanent_postal_code = $this->teacher->permanent_postal_code;
+        $this->permanent_address = $this->teacher->permanent_address;
+        $this->subjects_of_teaching = json_decode($this->teacher->subjects_of_teaching, true) ?? [];
+
+        // Load qualifications and training information
+        $this->educational_qualifications = EducationalQualification::where('teacher_id', $this->teacher->id)->get()->toArray();
+        $this->training_information = TrainingInformation::where('teacher_id', $this->teacher->id)->get()->toArray();
+
+        // Load locations data
+        $this->locations = json_decode(Storage::get('locations.json'), true);
     }
 
-    public function updateTeacher()
+    public function update()
     {
-        $validatedData = $this->validate();
+        $this->validate([
+            'photo' => 'nullable|image|max:1024',
+            'signature' => 'nullable|image|max:1024',
+            'name_bn' => 'required|string',
+            'name_en' => 'required|string',
+            'gender' => 'required|string',
+            'dob' => 'required|date',
+            'mobile_number' => 'required|string',
+            'email' => 'nullable|email',
+            'designation' => 'required|string',
+            'first_joining' => 'required|date',
+            'job_status' => 'required|string',
+            'pin_number' => 'required|string',
+            'nationality' => 'required|string',
+            'religion' => 'required|string',
+            'blood_group' => 'required|string',
+            'present_division' => 'required|string',
+            'present_district' => 'required|string',
+            'present_upazila' => 'required|string',
+            'present_union' => 'nullable|string',
+            'present_post_office' => 'required|string',
+            'present_postal_code' => 'nullable|string',
+            'present_address' => 'required|string',
+            'permanent_division' => 'required|string',
+            'permanent_district' => 'required|string',
+            'permanent_upazila' => 'required|string',
+            'permanent_union' => 'nullable|string',
+            'permanent_post_office' => 'required|string',
+            'permanent_postal_code' => 'nullable|string',
+            'permanent_address' => 'required|string',
+            'subjects_of_teaching' => 'nullable|array',
+            'educational_qualifications.*.degree' => 'required|string',
+            'educational_qualifications.*.subject' => 'required|string',
+            'educational_qualifications.*.board' => 'required|string',
+            'educational_qualifications.*.passing_year' => 'required|date_format:Y',
+            'educational_qualifications.*.grade' => 'required|string',
+            'training_information.*.training_details' => 'required|string',
+            'training_information.*.training_start_date' => 'required|date',
+            'training_information.*.training_end_date' => 'required|date',
+        ]);
 
-        if ($this->signature) {
-            $signaturePath = $this->signature->store('signatures', 'public');
-            $this->teacher->signature = $signaturePath;
-        }
+        $photoPath = $this->photo ? $this->photo->store('photos', 'public') : $this->teacher->photo;
+        $signaturePath = $this->signature ? $this->signature->store('signatures', 'public') : $this->teacher->signature;
 
-        // Update teacher data
         $this->teacher->update([
             'name_bn' => $this->name_bn,
             'name_en' => $this->name_en,
@@ -114,19 +127,53 @@ class EditComponent extends Component
             'first_joining' => $this->first_joining,
             'job_status' => $this->job_status,
             'pin_number' => $this->pin_number,
-            'nationality' => $this->nationality,
+            'nationality' => $this->nationality === 'Others' ? $this->customNationality : $this->nationality,
             'religion' => $this->religion,
             'blood_group' => $this->blood_group,
-            'signature' => $this->signature,
-            'present_address' => json_encode($this->present_address),
-            'permanent_address' => json_encode($this->permanent_address),
+            'signature' => $signaturePath,
+            'photo' => $photoPath,
+            'present_division' => $this->present_division,
+            'present_district' => $this->present_district,
+            'present_upazila' => $this->present_upazila,
+            'present_union' => $this->present_union,
+            'present_post_office' => $this->present_post_office,
+            'present_postal_code' => $this->present_postal_code,
+            'present_address' => $this->present_address,
+            'permanent_division' => $this->permanent_division,
+            'permanent_district' => $this->permanent_district,
+            'permanent_upazila' => $this->permanent_upazila,
+            'permanent_union' => $this->permanent_union,
+            'permanent_post_office' => $this->permanent_post_office,
+            'permanent_postal_code' => $this->permanent_postal_code,
+            'permanent_address' => $this->permanent_address,
             'subjects_of_teaching' => json_encode($this->subjects_of_teaching),
-            'educations' => json_encode($this->educations),
-            'trainings' => json_encode($this->trainings),
         ]);
 
-        flash()->success('Teacher updated successfully.!');
+        // Update educational qualifications
+        EducationalQualification::where('teacher_id', $this->teacher->id)->delete();
+        foreach ($this->educational_qualifications as $qualification) {
+            EducationalQualification::create([
+                'teacher_id' => $this->teacher->id,
+                'degree' => $qualification['degree'],
+                'subject' => $qualification['subject'],
+                'board' => $qualification['board'],
+                'passing_year' => $qualification['passing_year'],
+                'grade' => $qualification['grade'],
+            ]);
+        }
 
+        // Update training information
+        TrainingInformation::where('teacher_id', $this->teacher->id)->delete();
+        foreach ($this->training_information as $training) {
+            TrainingInformation::create([
+                'teacher_id' => $this->teacher->id,
+                'training_details' => $training['training_details'],
+                'training_start_date' => $training['training_start_date'],
+                'training_end_date' => $training['training_end_date'],
+            ]);
+        }
+
+        session()->flash('success', 'Teacher information updated successfully!');
         return redirect()->route('teachers.index');
     }
 
@@ -134,6 +181,4 @@ class EditComponent extends Component
     {
         return view('livewire.admin.teacher.edit-component');
     }
-
-
 }

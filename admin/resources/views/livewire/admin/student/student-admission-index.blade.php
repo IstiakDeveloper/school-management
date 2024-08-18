@@ -57,8 +57,9 @@
                             @endif
                         </td>
                         <td class="flex items-center px-6 py-4 whitespace-nowrap space-x-4">
-                            <a href="{{ route('student.edit', ['studentAdmission' => $studentAdmission->id]) }}" class="text-blue-600 hover:text-blue-900"><x-lucide-file-pen-line
-                                    class="h-6 w-6" /></a>
+                            <a href="{{ route('student-admissions.edit', $studentAdmission->id) }}" class="btn btn-primary">
+                                Edit
+                            </a>
                             <a href="{{ route('admin.students.show', $studentAdmission->id) }}"
                                 class="text-green-600 hover:text-green-900"><x-lucide-eye class="h-6 w-6" /></a>
                             <button wire:click="confirmDelete({{ $studentAdmission->id }})"

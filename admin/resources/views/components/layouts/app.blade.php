@@ -6,16 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+    
     <title>Mousumi Biddyniketon | Admin Panel</title>
 </head>
 
 <body>
+
+    <div id="loadingOverlay" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        <div id="loadingDots" class="flex space-x-2">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Sidebar Section -->
@@ -188,20 +198,45 @@
                     </div>
                 </div>
 
-                <a href="{{ route('attendance.logs') }}" class="{{ request()->routeIs('attendance.logs') ? 'active' : '' }}">
-                    <span class="material-icons-sharp">
-                        add_to_queue
-                    </span>
-                    <h3>Attendance Log</h3>
-                </a>
+                <div id="attendance-dropdown" class="dropdown {{ request()->is('attendance.logs', 'timestamp.teacher', 'attendance.teacher') ? 'active' : '' }}">
+                    <a href="#" id="attendance-toggle" class="flex items-center cursor-pointer dropdown-toggle">
+                        <span class="material-icons-sharp  text-sm">
+                            add_to_queue
+                        </span>
+                        <h3 class="">Attendance</h3>
+                        <span class="material-icons-sharp   icon-rotate  text-sm {{ request()->is('attendance.logs', 'timestamp.teacher', 'attendance.teacher') ? 'rotate-180' : '' }}">
+                            expand_more
+                        </span>
+                    </a>
+                    <div id="attendance-content" class="dropdown-content {{ request()->is('attendance.logs', 'timestamp.teacher', 'attendance.teacher') ? 'active' : '' }}">
+                        <a href="{{ route('attendance.logs') }}" class="block p-2 {{ request()->routeIs('attendance.logs') ? 'active' : '' }}">
+                            <span class="material-icons-sharp  text-sm">
+                                {{ request()->routeIs('attendance.logs') ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                            </span>
+                            Attendance Log
+                        </a>
+                        <a href="{{ route('timestamp.teacher') }}" class="block p-2 {{ request()->routeIs('timestamp.teacher') ? 'active' : '' }}">
+                            <span class="material-icons-sharp  text-sm">
+                                {{ request()->routeIs('timestamp.teacher') ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                            </span>
+                            Set Teacher Time
+                        </a>
+                        <a href="{{ route('attendance.teacher') }}" class="block p-2 {{ request()->routeIs('attendance.teacher') ? 'active' : '' }}">
+                            <span class="material-icons-sharp  text-sm">
+                                {{ request()->routeIs('attendance.teacher') ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                            </span>
+                            Teacher Attendance
+                        </a>
+                    </div>
+                </div>
 
 
-                <a href="{{ route('finger_device.index') }}" class="{{ request()->routeIs('finger_device.index') ? 'active' : '' }}">
+                {{-- <a href="{{ route('finger_device.index') }}" class="{{ request()->routeIs('finger_device.index') ? 'active' : '' }}">
                     <span class="material-icons-sharp">
                         fingerprint
                     </span>
                     <h3>Biomatric Device</h3>
-                </a>
+                </a> --}}
 
                 
 
@@ -249,7 +284,11 @@
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{asset('index.js')}}"></script>
+    <script src="{{asset('frontIndex.js')}}"></script>
+
+
     <script>
         document.querySelectorAll('.dropdown-toggle').forEach(item => {
             item.addEventListener('click', event => {

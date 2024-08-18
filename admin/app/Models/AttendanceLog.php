@@ -23,7 +23,13 @@ class AttendanceLog extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'user_id');
     }
+    
+    protected $casts = [
+        'timestamp' => 'datetime',
+        'clock_in' => 'datetime',
+        'clock_out' => 'datetime',
+    ];
     
 }

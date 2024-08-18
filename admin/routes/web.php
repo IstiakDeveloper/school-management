@@ -26,15 +26,18 @@ use App\Livewire\Admin\Teacher\CreateComponent;
 use App\Livewire\Admin\Teacher\EditComponent;
 use App\Livewire\Admin\Teacher\ShowComponent;
 use App\Livewire\AttendanceLogComponent;
+use App\Livewire\AttendanceTeacherComponent;
 
 ;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Blog\BlogShow;
 use App\Livewire\FingerDeviceComponent;
 use App\Livewire\RP\PermissionManager;
 use App\Livewire\RP\RoleManager;
 use App\Livewire\RP\UserManager;
 use App\Livewire\TeacherAttendanceManager;
+use App\Livewire\TimeStampTeacherComponent;
 use App\Livewire\User\HomeComponent;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +52,12 @@ Route::get('/storage-link', function () {
     }
 })->name('storage.link');
 
+Route::get('/migrate',function(){
+    Artisan::call('migrate');
+});
+
+
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', Register::class)->name('register');
@@ -56,7 +65,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/', Logout::class)->name('logout');
-Route::get('/blog/{id}', [BlogComponent::class, 'show'])->name('blog.show');
+Route::get('/blog/{id}', BlogShow::class)->name('blog.show');
+
 
 Route::get('/finger-device', FingerDeviceComponent::class)->name('finger_device.index');
 
@@ -74,7 +84,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admission-create', StudentAdmissionCreate::class)->name('admission-create');
     Route::get('/admissions', StudentAdmissionIndex::class)->name('admissions');
     Route::get('/admin/students/{id}', StudentAdmissionShow::class)->name('admin.students.show');
-    Route::get('/admin/student/{studentAdmission}/edit', StudentAdmissionEdit::class)->name('student.edit');
+    // Route::get('/admin/student/{studentAdmission}/edit', StudentAdmissionEdit::class)->name('student.edit');
+    Route::get('/admin/student-admissions/{id}/edit', StudentAdmissionEdit::class)
+     ->name('student-admissions.edit');
 
 
     Route::get('/subjects', SubjectIndex::class)->name('subjects.index');
@@ -101,11 +113,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('admin/teachers', IndexComponent::class)->name('teachers.index');
     Route::get('admin/teachers/create', CreateComponent::class)->name('teachers.create');
-    Route::get('/teachers/{teacher}/edit', EditComponent::class)->name('teachers.edit');
+    Route::get('/teachers/edit/{teacherId}', EditComponent::class)->name('teachers.edit');
     Route::get('/teachers/{teacher}', ShowComponent::class)->name('teachers.show');
 
+    Route::get('/timestamp-teacher', TimeStampTeacherComponent::class)->name('timestamp.teacher');
     Route::get('/attendance-logs', AttendanceLogComponent::class)->name('attendance.logs');
+    Route::get('/attendance-teacher', AttendanceTeacherComponent::class)->name('attendance.teacher');
     Route::get('/teacher-attendance', TeacherAttendanceManager::class)->name('teacher.attendance');
+
 
     Route::get('/download-pdf/{filename}', function ($filename) {
         $filePath = storage_path('app/public/pdf/' . $filename);
